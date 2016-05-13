@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+  <link href='https://fonts.googleapis.com/css?family=Cinzel:400,700' rel='stylesheet' type='text/css'>
+
+  <style type="text/css">
+	.gentheme{
+  		color:white;
+  		background-image: url('http://cdn1.vox-cdn.com/assets/4229567/game-of-thrones-poster_85627-1920x1200.jpg');
+  		background-size:cover;
+      font-family:Cinzel
+  	}
+  	.blackbtn{
+  		background-color: black;
+      margin:10px
+  	}
+		.isize{
+	  	height:400px;
+  	}
+
+  </style>
+
+
+	 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body class="gentheme">
+  <h1 class="text-center" style="margin-top:100px;margin-bottom:100px"> What Game of Thrones house should you be in? </h1>
+  <div id="container">
+  <!--
+  <div id="question"></div>
+			option ids will be added by jquery in random order:
+> -->
+	</div>
+  <script src="https://code.jquery.com/jquery-2.2.3.js"
+			  integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
+          crossorigin="anonymous"></script>
+
+	<script>
+
+
+
+    //we need to add event listeners on the buttons!
+
+    var result=0;
+
+    var question1 = {
+//       id: 1,
+      title: "When is violence acceptable?",
+      options: ['If necessary to protect a loved one','When it feels right','When I am taking spoils','When it serves my goal']
+    };
+
+      var question2 = {
+//       	id: 2,
+        title:"What's your favorite animal?",
+    		options: ['direwolf','stag','dragon','lion']
+      };
+
+    var question3 = {
+//       id: 3,
+      title:"What season do you like the best",
+    	options: ['winter','autumn','spring','summer']
+    };
+
+    var question4 = {
+//       id: 4,
+      title: "What is your hair color?",
+    	options: ['auburn','black','silver','blond']
+    };
+
+    var question5 = {
+//       //id: 5,
+      title:"What gods do you believe in?",
+    	options: ['Old Gods of the Forest','Lord of the Light','Valyrian','Faith of the Seven']
+      };
+    //var question5 = "What coat of arms do you best identify with?";
+    	//var options5 = {st:'X', ba:'x', ta:'x', la:'x'};
+    //var question5 = "What words do you best identify with?";
+    	//var options5 = {st:'X', ba:'x', ta:'x', la:'x'};
+
+    var questions = [question1, question2, question3, question4, question5] //array of strings
+
+    //ask questions and show buttons *w/images or text with event listeners, displayed in a random order
+    //once user clicks, go to next page using clear div
+
+    //var questionId = 0; //ID for which question/options pair we're on
+
+//     questions[questionId]['options'][0]
+//     questions[0]['options'][0]
+//     ^ questions array , first question, options of first Question, 1st option
+
+    var addContent = function(questionId) {
+    	//$('#container').clear();
+      $('#container').append('<div id="question" class="text-center col-md-6 center col-md-offset-3"><h3>'+ questions[questionId]['title']+'</h3></div>');
+      //*loop items below (id and options id), put them in random order
+      $('#container').append('<div id="0" class="option col-md-2 col-md-offset-5"><button class="blackbtn btn" value="0">' + questions[questionId]['options'][0] + '</button></div><br />');
+      $('#container').append('<div id="1" class="option col-md-2 col-md-offset-5"><button class="blackbtn btn" value="1">' + questions[questionId]['options'][1] + '</button></div><br />');
+      $('#container').append('<div id="2" class="option col-md-2 col-md-offset-5"><button class="blackbtn btn" value="2">' + questions[questionId]['options'][2] + '</button></div><br />');
+      $('#container').append('<div id="3" class="option col-md-2 col-md-offset-5"><button class="blackbtn btn" value="3">' + questions[questionId]['options'][3] + '</button></div>');
+      console.log(questions[questionId]['options'][0]);
+      questionId ++;
+    };
+
+    var result = 0;
+
+    var addListener = function(i, l) {
+        $('button').click(function(){
+            result += 1 + parseInt($(this).attr('value'));
+            i++;
+            displayQuestions (i, l);
+          	if (i>3) {
+            showResult();
+            }
+        });
+    }
+
+    var displayQuestions = function ( index, len) {
+        if (index<len){
+            $('#container').empty();
+            addContent(index);
+            addListener(index, len);
+            //uncomment the line below to test out the result variable
+//            alert(result);
+        }
+    }
+
+    displayQuestions(0, questions.length);
+
+
+   var resultsToDisplay = [
+     {
+        name: "House Stark of Winterfell",
+        content: "You're kinda cool",
+      	images: 'https://dimitrijesimonovic.files.wordpress.com/2014/04/519e2f2ec93fb24963.jpg?w=2000&h=',
+        api_id: 362
+      },
+      {
+      	name: "House Baratheon of King's Landing",
+        content: "You suck",
+      	images: 'https://dimitrijesimonovic.files.wordpress.com/2014/04/the-images-of-multicolor-game-of-thrones-tv-series-house-baratheon-games-images-game-of-thrones-hd-wallpaper.jpg?w=2000&h=',
+        api_id: 16
+      },
+      {
+      	name: "House Targaryen of King's Landing",
+        content: "You're awesome",
+      	images: 'http://www.pixelstalk.net/wp-content/uploads/2015/11/game-of-thrones-background-picture-new-best-hd-wallpapers-free.jpg',
+        api_id: 378
+      },
+   	{
+   			name: "House Lannister of Casterly Rock",
+        content: "You're kinda cool",
+      	images: 'https://dimitrijesimonovic.files.wordpress.com/2014/04/house-lannister-house-lannister-31720461-1920-1080.jpg?w=2000&h=',
+        api_id: 229
+      },
+    ];
+
+
+
+     var showResult = function() {
+     	$('#container').empty();
+     	if (result <= 4 ) {
+        //Stark
+        //resultsToDisplay[0].images
+      	console.log(result);
+        $('#container').append('<div id="result" class="col-md-6 col-md-offset-3"><h2>' + 'You belong in the... <br><h1>' +
+                               resultsToDisplay[0]["name"] + '!!!!</h1><br><img class="isize" src="' + resultsToDisplay[0]["images"] + '"/></h2></div>');
+      }
+      else if (result <= 9) {
+        console.log(result);
+        $('#container').append('<div id="result" class="col-md-6 col-md-offset-3"><h2>' + 'You belong in the... <br><h1>' +
+                               resultsToDisplay[1]["name"] + '!!!!</h1><br><img class="isize" src="' + resultsToDisplay[1]["images"] + '"/></h2></div>');
+      }
+      else if (result <= 12) {
+        console.log(result);
+        $('#container').append('<div id="result" class="col-md-6 col-md-offset-3"><h2>' + 'You belong in the... <br><h1>' +
+                               resultsToDisplay[2]["name"] + '!!!!</h1><br><img class="isize" src="' + resultsToDisplay[2]["images"] + '"/></h2></div>');
+      }
+      else {
+        console.log(result);
+        $('#container').append('<div id="result" class="col-md-6 col-md-offset-3"><h2>' + 'You belong in the... <br><h1>' +
+                               resultsToDisplay[3]["name"] + '!!!!</h1><br><img class="isize" src="' + resultsToDisplay[3]["images"] + '"/></h2></div>');
+      }
+    //   else {
+    //     //error handling: if for some reason, result isn't in the range 0-16
+				// console.log(result);
+    //     $('#container').append('<div id="result" class="col-md-6 col-md-offset-3"><h2>' + 'You belong in the... ' + resultsToDisplay[0]["images"] + '!!!!</h2></div>');
+    //   }
+		};
+
+
+    //*nice transition
+    //change result variable based on answer
+    //call the API to get the hosue info and display it
+    //*change it to the opposite if you want hehe :3
+    //*funny/sarcastic questions and answers
+    //*nice transition
+    //can store all responses later
+
+    //useful keys in object:
+
+    //Stark (0) 0-4 , id = 362 , http://anapioficeandfire.com/api/houses?name=House%20Stark%20of%20Winterfell
+    //Baratheon (1) 5-8 , id = 16 (check if it's 15)
+    //Targaryen (2) 9-12, id = 378
+    //Lannister (3) 13-16 , id = 229 , http://anapioficeandfire.com/api/houses?name=House%20Lannister%20of%20Casterly%20Rock
+
+
+	var get_data= {
+    url: 'https://anapioficeandfire.com/api/houses/',
+    initialize: function(id){
+    	this.url += id;
+    	var thatHouse = this;
+      $.get(this.url, function(data){
+         thatHouse.attributes = data;
+      }); //end of get
+    } //end of initialize
+  };
+
+  console.log(get_data.initialize(362));
+
+	</script>
+</body>
+</html>
